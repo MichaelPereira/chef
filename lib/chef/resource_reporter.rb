@@ -224,6 +224,10 @@ class Chef
       end
     end
 
+    def node_load_completed(node, expanded_run_list, config)
+      @expanded_run_list = expanded_run_list
+    end
+
     def post_reporting_data
       if reporting_enabled?
         run_data = prepare_run_data
@@ -274,6 +278,7 @@ class Chef
       end
       run_data["status"] = @status
       run_data["run_list"] = Chef::JSONCompat.to_json(@run_status.node.run_list)
+      run_data["expanded_run_list"] = @expanded_run_list
       run_data["total_res_count"] = @total_res_count.to_s
       run_data["data"] = {}
       run_data["start_time"] = start_time.to_s

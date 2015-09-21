@@ -424,6 +424,11 @@ describe Chef::ResourceReporter do
         expect(@report["run_list"]).to eq(Chef::JSONCompat.to_json(@run_status.node.run_list))
       end
 
+      it "includes the expanded_run_list" do
+        expect(@report).to have_key("expanded_run_list")
+    
+      end
+
       it "includes the end_time" do
         expect(@report).to have_key("end_time")
         expect(@report["end_time"]).to eq(@run_status.end_time.to_s)
